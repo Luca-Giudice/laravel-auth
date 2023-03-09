@@ -3,8 +3,8 @@
 @section('title', 'Projects')
 
 @section('content')
-<header>
-    <h1>PROJECTS</h1>
+<header class="text-center">
+    <h1 class="my-5">PROJECTS</h1>
 </header>
 
     <table class="table table-dark table-hover">
@@ -13,6 +13,7 @@
       <th scope="col">id</th>
       <th scope="col">Title</th>
       <th scope="col">Slug</th>
+      <th scope="col">Projects</th>
       <th scope="col">Creato</th>
       <th scope="col">Aggiornato il:</th>
       <th></th>
@@ -26,6 +27,7 @@
         <th scope="row">{{$project->id}}</th>
         <td>{{$project->title}}</td>
         <td>{{$project->slug}}</td>
+        <td>{{$project->link}}</td>
         <td>{{$project->created_at}}</td>
         <td>{{$project->updated_at}}</td>
         <td>
