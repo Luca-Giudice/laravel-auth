@@ -21,10 +21,19 @@
             <time>{{$project->updated_at}}</time>
 
         </p>
+        <p>
+            <strong>link:</strong>
+            {{$project->link}}
+
+        </p>
     </div>
 </div>
 <div>
 
     <p>{{$project->content}}</p>
 </div>
+<hr>
+<div class="d-flex justify-content-center">
+    <a class="btn btn btn-outline-success" href="{{route('admin.projects.index')}}"><i class="fa-solid fa-arrow-left-long me-2"></i>TORNA INDIETRO</a>
+</div>  
 @endsection
