@@ -21,9 +21,9 @@ use App\Http\Controllers\Admin\ProjectController;
 Route::get('/', [GuestHomeController::class, 'index']);
 
 // Rotte Protette
-Route::middleware(['auth', 'verified'])->name('admin.')->prefix('admin')->group(function(){
+Route::middleware(['auth'])->name('admin.')->prefix('admin')->group(function(){
     // Home dell'utente loggato
-    Route::get('/', [AdminHomeController::class, 'index'])->name('admin.home');
+    Route::get('/', [AdminHomeController::class, 'index'])->name('home');
     // Rotte dei project
     Route::resource('projects', ProjectController::class);
 
