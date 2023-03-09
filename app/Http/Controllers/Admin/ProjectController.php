@@ -14,9 +14,9 @@ class ProjectController extends Controller
      */
     public function index()
     {
-        $projects = Project::all();
+        $projects = Project::orderBy('updated_at', 'DESC')->get();
 
-        return view('admin.projects.index', compact('posts'));
+        return view('admin.projects.index', compact('projects'));
     }
 
     /**
@@ -40,7 +40,7 @@ class ProjectController extends Controller
      */
     public function show(Project $project)
     {
-        //
+        return view('admin.projects.show', compact('project'));
     }
 
     /**
