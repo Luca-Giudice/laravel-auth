@@ -2,7 +2,11 @@
             <div class="container">
                 <a class="navbar-brand d-flex align-items-center" href="{{ url('/') }}">
                     <div class="logo_laravel">
-                       PORFOLIO
+                       <h1>
+                    
+                           PORFOLIO
+                    </h1>
+                        
                     </div>
                     {{-- config('app.name', 'Laravel') --}}
                 </a>
@@ -13,12 +17,12 @@
 
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <!-- Left Side Of Navbar -->
-                    <ul class="navbar-nav me-auto">
+                    <ul class="navbar-nav me-auto ">
                         @auth
-                        <li class="nav-item">
+                        <li class="nav-item fw-bold ">
                             <a class="nav-link @if(Route::is('admin.home')) active @endif" href="{{url('/') }}">{{ __('Home') }}</a>
                         </li>
-                        <li class="nav-item">
+                        <li class="nav-item fw-bold">
                             <a class="nav-link @if(Route::is('admin.project.index')) active @endif" href="{{route('admin.projects.index') }}">{{ __('Projects') }}</a>
                         </li>
                         @endauth
@@ -28,11 +32,11 @@
                     <ul class="navbar-nav ml-auto">
                         <!-- Authentication Links -->
                         @guest
-                        <li class="nav-item">
+                        <li class="nav-item fw-bold">
                             <a class="nav-link" href="{{ route('login') }}">{{ __('Login') }}</a>
                         </li>
                         @if (Route::has('register'))
-                        <li class="nav-item">
+                        <li class="nav-item fw-bold">
                             <a class="nav-link" href="{{ route('register') }}">{{ __('Register') }}</a>
                         </li>
                         @endif
