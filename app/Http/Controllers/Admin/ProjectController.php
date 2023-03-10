@@ -14,6 +14,8 @@ class ProjectController extends Controller
      */
     public function index()
     {
+        return to_route('admin.projects.show', 1)->with('type', 'danger')->with('msg', 'test');
+
         $projects = Project::orderBy('updated_at', 'DESC')->get();
 
         return view('admin.projects.index', compact('projects'));
@@ -64,6 +66,8 @@ class ProjectController extends Controller
      */
     public function destroy(Project $project)
     {
-        //
+        $project->delete();
+
+        return to_route('admin.projects.index')->with('type', 'danger')->with('msg', "Il progetto '$project->title' è stato rimosso");
     }
 }

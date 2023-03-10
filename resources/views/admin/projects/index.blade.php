@@ -30,9 +30,15 @@
         <td>{{$project->link}}</td>
         <td>{{$project->created_at}}</td>
         <td>{{$project->updated_at}}</td>
-        <td>
+        <td class="d-flex justify-content-end align-items-center">
             <a href="{{route('admin.projects.show', $project->id)}}" class="btn btn-sm btn-dark"><i class="fa-solid fa-hurricane"></i></a>
-        </td>
+            
+            <form method="POST" action="{{route('admin.projects.destroy', $project->id)}}">
+              @csrf
+              @method('DELETE')
+              <button class="btn btn-sm btn-dark" type="submi"><i class="fa-solid fa-trash"></i></button>
+            </form>
+          </td>
 
     </tr>
     @empty
