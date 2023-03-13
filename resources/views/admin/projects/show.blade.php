@@ -34,6 +34,16 @@
 </div>
 <hr>
 <div class="d-flex justify-content-center">
+    <form method="POST" action="{{route('admin.projects.destroy', $project->id)}}" class="delete-form">
+              @csrf
+              @method('DELETE')
+              <button class="me-2 btn btn-outline-danger" type="submit"><i class=" p-1 fa-solid fa-trash"></i>ELIMINA</button>
+            </form>
     <a class="btn btn btn-outline-success" href="{{route('admin.projects.index')}}"><i class="fa-solid fa-arrow-left-long me-2"></i>TORNA INDIETRO</a>
+    
 </div>  
+@endsection
+
+@section('scripts')
+    
 @endsection

@@ -3,8 +3,9 @@
 @section('title', 'Projects')
 
 @section('content')
-<header class="text-center">
+<header class="text-center d-flex justify-content-between align-items-center">
     <h1 class="my-5">PROJECTS</h1>
+    <a href="{{route('admin.projects.create')}}" class="btn btn-black"><i class="fas fa-plus me-2"></i> Importa un Nuovo Progetto</a>
 </header>
 
     <table class="table table-dark table-hover">
@@ -33,7 +34,7 @@
         <td class="d-flex justify-content-end align-items-center">
             <a href="{{route('admin.projects.show', $project->id)}}" class="btn btn-sm btn-dark"><i class="fa-solid fa-hurricane"></i></a>
             
-            <form method="POST" action="{{route('admin.projects.destroy', $project->id)}}">
+            <form method="POST" action="{{route('admin.projects.destroy', $project->id)}}" class="delete-form">
               @csrf
               @method('DELETE')
               <button class="btn btn-sm btn-dark" type="submi"><i class="fa-solid fa-trash"></i></button>
@@ -50,4 +51,18 @@
   </tbody>
   
     </table>
+    
+@endsection
+
+@section('scripts')
+    <script>
+      const deleteForms = document.querySelectorAll('.delete-form')
+      deleteForms.forEach(form=>{
+        form.addEventListener('submit', e => {
+          e.preventDefault();
+          const hasConfirmed = confirm('Sei sicuro di voler cancellare questo progetto?');
+          if(hasConfirmed) form.submit();
+        });
+      })
+    </script>
 @endsection
