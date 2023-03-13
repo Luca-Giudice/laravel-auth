@@ -33,7 +33,7 @@
         <td>{{$project->updated_at}}</td>
         <td class="d-flex justify-content-end align-items-center">
             <a href="{{route('admin.projects.show', $project->id)}}" class="btn btn-sm btn-dark"><i class="fa-solid fa-hurricane"></i></a>
-            
+            <a href="{{route('admin.projects.edit', $project->id)}}" class="btn btn-sm btn-dark m-2"><i class="fa-solid fa-pencil"></i></a>
             <form method="POST" action="{{route('admin.projects.destroy', $project->id)}}" class="delete-form">
               @csrf
               @method('DELETE')

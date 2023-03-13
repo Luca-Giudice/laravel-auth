@@ -34,6 +34,7 @@
 </div>
 <hr>
 <div class="d-flex justify-content-center">
+    <a href="{{route('admin.projects.edit', $project->id)}}" class="btn btn-outline-warning me-2"><i class="fa-solid fa-pencil p-1"></i>Modifica</a>
     <form method="POST" action="{{route('admin.projects.destroy', $project->id)}}" class="delete-form">
               @csrf
               @method('DELETE')

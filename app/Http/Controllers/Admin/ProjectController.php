@@ -40,7 +40,7 @@ class ProjectController extends Controller
         $data['slug'] = Str::slug($data['title'], '/');
         $project->fill($data);
         $project->save();
-        return to_route('admin.projects.show', $project->id);
+        return to_route('admin.projects.show', $project->id)->with('type','success')->with('Progetto caricato con successo');
     }
 
     /**
@@ -56,7 +56,7 @@ class ProjectController extends Controller
      */
     public function edit(Project $project)
     {
-        //
+        return view('admin.projects.edit', compact('project'));
     }
 
     /**
