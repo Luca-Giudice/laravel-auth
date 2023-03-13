@@ -1,4 +1,4 @@
-@if (@isset($project))
+@if ($project->exists)
     
 <form action="{{route('admin.projects.update', $project->id)}}" method="POST">
 </form> 
@@ -12,7 +12,7 @@
     <div class="col-md-4">
         <div class="mb-3">
   <label for="title" class="form-label">Titolo Progetto</label>
-  <input type="text" class="form-control" id="title" name="title" required>
+  <input type="text" class="form-control" id="title" name="title" value="{{$project->title}}" required>
   <div class=" text-muted">Inserisci il titolo</div>
 </div>
 
