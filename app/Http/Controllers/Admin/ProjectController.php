@@ -6,6 +6,7 @@ use Illuminate\Support\Str;
 use App\Models\Project;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Illuminate\Validation\Rule;
 
 
 class ProjectController extends Controller
@@ -36,6 +37,21 @@ class ProjectController extends Controller
      */
     public function store(Request $request)
     {
+        $request->validate([
+            'title' => 'required|string|unique:projects|min:5|max:20',
+            'content'=> 'required|string|min:3',
+            'image' => 'nullable|url',
+            'link' => 'url',
+        ],[
+            'title.required' => 'Il titolo è obbligatorio',
+            'title.min' => 'Il titolo deve avere almeno 5 caratteri',
+            'title.max' => 'Il titolo deve avere massimo 20 caratteri',
+            'title.unique' => 'Questo progetto esiste già',
+            'content.required' => 'Il post deve avere un contenuto',
+            'image.url' => 'Il link deve essere valido',
+            'link.url' => 'il link deve essere valido',
+
+        ]);
         $data = $request->all();
         $project = new Project();
         $data['slug'] = Str::slug($data['title'], '/');
@@ -65,10 +81,26 @@ class ProjectController extends Controller
      */
     public function update(Request $request, Project $project)
     {
+        $request->validate([
+            'title' => ['required', 'string', Rule::unique('projects')->ignore($project->id),'min:5','max:20'],
+            'content' => 'required|string|min:3',
+            'image' => 'nullable|url',
+            'link' => 'url',
+        ], [
+            'title.required' => 'Il titolo è obbligatorio',
+            'title.min' => 'Il titolo deve avere almeno 5 caratteri',
+            'title.max' => 'Il titolo deve avere massimo 20 caratteri',
+            'title.unique' => 'Questo progetto esiste già',
+            'content.required' => 'Il post deve avere un contenuto',
+            'image.url' => 'Il link deve essere valido',
+            'link.url' => 'il link deve essere valido',
+
+        ]);
         $data = $request->all();
 
-        $project->slug= Str::slug($data['title'], '/');
+        $data['slug']= Str::slug($data['title'], '/');
         $project->update($data);
+        return to_route('admin.projects.show', $project->id)->with('type', 'success')->with('msg','Progetto modificato con successo');
     }
 
     /**

@@ -28,6 +28,7 @@
 
         <main class="container">
             @include('includes.alert')
+            @include('includes.errors-alert')
             @yield('content')
         </main>
     </div>

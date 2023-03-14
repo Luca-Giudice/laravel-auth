@@ -12,23 +12,35 @@
     <div class="col-md-4">
         <div class="mb-3">
   <label for="title" class="form-label">Titolo Progetto</label>
-  <input type="text" class="form-control" id="title" name="title" value="{{$project->title}}" required>
+  <input type="text" class="form-control @error('title') is-invalid @enderror" id="title" name="title" value="{{$project->title}}" required minlength="5" maxlength="20">
+  @error('title')
+  <div class="is-invalid">{{$message}}</div>
+  @else
   <div class=" text-muted">Inserisci il titolo</div>
+  @enderror
 </div>
 
 </div>
  <div class="col-md-4">
         <div class="mb-3">
   <label for="image" class="form-label">Immagine</label>
-  <input type="url" class="form-control" id="image" name="image">
+  <input type="url" class="form-control  @error('image') is-invalid @enderror" id="image" name="image">
+   @error('image')
+  <div class="is-invalid">{{$message}}</div>
+  @else
   <div class=" text-muted">Inserisci immagine</div>
-    </div>
+  @enderror
+  </div>
  </div>
  <div class="col-md-4">
         <div class="mb-3">
   <label for="link" class="form-label">Link Progetto</label>
-  <input type="link" class="form-control" id="link" name="link">
-  <div class=" text-muted">Inserisci immagine</div>
+  <input type="url" class="form-control  @error('link') is-invalid @enderror" id="link" name="link">
+   @error('link')
+  <div class="is-invalid">{{$message}}</div>
+  @else
+  <div class=" text-muted">Inserisci il link</div>
+  @enderror
     </div>
  </div>
 
@@ -37,7 +49,12 @@
 
 <div class="mb-3">
   <label for="content" class="form-label">Descrizione progetto</label>
-  <textarea class="form-control" id="content" name="content" rows="5"></textarea>
+  <textarea class="form-control  @error('content') is-invalid @enderror" id="content" name="content" rows="5"></textarea>
+   @error('content')
+  <div class="is-invalid">{{$message}}</div>
+  @else
+  <div class=" text-muted">Inserisci il contenuto</div>
+  @enderror
 
 
 
