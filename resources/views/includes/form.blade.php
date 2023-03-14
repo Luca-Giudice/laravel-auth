@@ -1,12 +1,12 @@
 @if ($project->exists)
     
-<form action="{{route('admin.projects.update', $project->id)}}" method="POST">
+<form action="{{route('admin.projects.update', $project->id)}}" method="POST" enctype="multipart/form-data">
 </form> 
   @method('PUT')
   @else
-<form action="{{route('admin.projects.store')}}" method="POST"></form>    
+<form action="{{route('admin.projects.store')}}" method="POST" enctype="multipart/form-data">    
 @endif
-<form action="{{route('admin.projects.store')}}" method="POST">
+
 @csrf
 <div class="row">
     <div class="col-md-4">
@@ -24,12 +24,8 @@
  <div class="col-md-4">
         <div class="mb-3">
   <label for="image" class="form-label">Immagine</label>
-  <input type="url" class="form-control  @error('image') is-invalid @enderror" id="image" name="image">
-   @error('image')
-  <div class="is-invalid">{{$message}}</div>
-  @else
-  <div class=" text-muted">Inserisci immagine</div>
-  @enderror
+  <input type="file" class="form-control" id="image" name="image">
+  
   </div>
  </div>
  <div class="col-md-4">
@@ -68,3 +64,10 @@
     <button type="submit" class="btn btn-outline-secondary"><i class="fa-solid fa-download"></i> Salva</button>
 </footer>
 </form>
+
+
+@section('scrips')
+<script>
+
+</script>
+@endsection

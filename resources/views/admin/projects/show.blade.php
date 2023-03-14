@@ -8,7 +8,7 @@
 </header>
 <div class="d-flex align-items-center">
     @if($project->image)
-    <img class="my-3 p-5" src="{{$project->image}}" alt="">
+    <img class="me-5 img-fluid" src="{{$project->image}}" alt="">
     @endif
     <div class="">
         <p>

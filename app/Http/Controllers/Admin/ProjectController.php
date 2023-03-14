@@ -6,6 +6,7 @@ use Illuminate\Support\Str;
 use App\Models\Project;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Storage;
 use Illuminate\Validation\Rule;
 
 
@@ -40,7 +41,7 @@ class ProjectController extends Controller
         $request->validate([
             'title' => 'required|string|unique:projects|min:5|max:20',
             'content'=> 'required|string|min:3',
-            'image' => 'nullable|url',
+            'image' => 'nullable|image',
             'link' => 'url',
         ],[
             'title.required' => 'Il titolo è obbligatorio',
@@ -55,6 +56,11 @@ class ProjectController extends Controller
         $data = $request->all();
         $project = new Project();
         $data['slug'] = Str::slug($data['title'], '/');
+        $project = new Project();
+        if(array_key_exists('image', $data)){
+          $img_url = Storage::put('projects', $data['image']);
+          $data['image'] = $img_url;
+        }
         $project->fill($data);
         $project->save();
         return to_route('admin.projects.show', $project->id)->with('type','success')->with('Progetto caricato con successo');
@@ -84,7 +90,7 @@ class ProjectController extends Controller
         $request->validate([
             'title' => ['required', 'string', Rule::unique('projects')->ignore($project->id),'min:5','max:20'],
             'content' => 'required|string|min:3',
-            'image' => 'nullable|url',
+            'image' => 'nullable|image',
             'link' => 'url',
         ], [
             'title.required' => 'Il titolo è obbligatorio',
@@ -99,6 +105,11 @@ class ProjectController extends Controller
         $data = $request->all();
 
         $data['slug']= Str::slug($data['title'], '/');
+        if (array_key_exists('image', $data)) {
+            if($project->image) Storage::delete($project->image);
+            $img_url = Storage::put('projects', $data['image']);
+            $data['image'] = $img_url;
+        }
         $project->update($data);
         return to_route('admin.projects.show', $project->id)->with('type', 'success')->with('msg','Progetto modificato con successo');
     }
